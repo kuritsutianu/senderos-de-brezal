@@ -6,7 +6,7 @@
   root.classList.add("js");
 
   // --- Idioma: el de la dirección (/privacy → inglés), el elegido antes o el del navegador ---
-  var english = /privacy|delete-account/.test(location.pathname);
+  var english = /privacy|delete-account|\/terms/.test(location.pathname);
   var saved = null;
   try { saved = localStorage.getItem("brezal-lang"); } catch (e) { /* sin almacenamiento */ }
   var lang = location.hash === "#en" ? "en" : location.hash === "#es" ? "es"
