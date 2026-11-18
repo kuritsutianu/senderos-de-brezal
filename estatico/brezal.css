@@ -126,8 +126,11 @@ main { max-width: 860px; margin: -60px auto 0; padding: 0 16px 40px; position: r
   border: 3px solid var(--paper-edge);
   border-radius: var(--radius);
   box-shadow: 0 7px 0 var(--paper-edge), 0 14px 30px rgba(91, 70, 54, .08);
-  padding: 22px 26px 20px;
+  padding: 24px 28px 22px;
   margin: 0 0 26px;
+}
+@media (max-width: 520px) {
+  .card { padding: 20px 18px 18px; }
 }
 .card h2 {
   display: flex; align-items: center; gap: 12px;
@@ -151,9 +154,13 @@ main { max-width: 860px; margin: -60px auto 0; padding: 0 16px 40px; position: r
 .card:nth-of-type(6n+4) .badge { background: var(--rose); }
 .card:nth-of-type(6n+5) .badge { background: #b19cd8; }
 .card:nth-of-type(6n+6) .badge { background: #e1b346; }
-.card p, .card li { hyphens: auto; }
-@media (min-width: 640px) {
-  .card p, .card li { text-align: justify; }  /* en el móvil, justificado deja huecos grandes */
+.card p { margin: 0 0 10px; }
+.card p:last-child { margin-bottom: 0; }
+/* Todo el texto de los recuadros, justificado y con partición de palabras
+   (cada artículo lleva su lang) para que en el móvil no queden huecos grandes. */
+.card p, .card li, .data .row > div, .note {
+  text-align: justify; text-justify: inter-word;
+  hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word;
 }
 .card ul, .card ol { padding-left: 1.3em; }
 .card li { margin: 4px 0; }
@@ -166,12 +173,14 @@ a { color: #3e7fa3; font-weight: 800; text-decoration-thickness: 2px; text-under
 }
 
 /* Tabla de datos: tarjetas dentro de la tarjeta */
-.data { display: grid; gap: 14px; margin: 6px 0 12px; }
+.data { display: grid; gap: 14px; margin: 10px 0 14px; }
 .data .row {
   background: #fff; border: 2px solid var(--cream-dark); border-radius: 18px;
-  padding: 12px 16px; display: grid; gap: 6px;
-  grid-template-columns: 1.4fr 1.2fr .9fr;
+  padding: 14px 18px; display: grid; gap: 10px 24px;
+  grid-template-columns: 1.15fr 1fr;
 }
+/* «Datos» a todo el ancho; debajo, «Para qué» y «Base legal» en dos columnas anchas. */
+.data .row > div:first-child { grid-column: 1 / -1; }
 .data .row > div::before {
   content: attr(data-label); display: block;
   font-size: .75rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;
@@ -180,14 +189,19 @@ a { color: #3e7fa3; font-weight: 800; text-decoration-thickness: 2px; text-under
 @media (max-width: 700px) {
   .data .row { grid-template-columns: 1fr; }
 }
+@media (max-width: 520px) {
+  /* Caja dentro de caja: menos margen y letra algo menor para que el justificado no deje huecos. */
+  .data .row { padding: 12px 13px; font-size: .94rem; line-height: 1.5; }
+  .note { padding: 11px 13px; }
+}
 
 .note {
   border-left: 6px solid var(--gold); background: #fff8e3;
-  border-radius: 14px; padding: 10px 14px; margin-top: 12px;
+  border-radius: 14px; padding: 12px 18px; margin-top: 14px;
 }
 .steps { counter-reset: step; list-style: none; padding: 0 !important; }
 .steps li {
-  counter-increment: step; position: relative; padding: 10px 14px 10px 56px;
+  counter-increment: step; position: relative; padding: 12px 18px 12px 58px; text-align: justify; hyphens: auto;
   background: #fff; border: 2px solid var(--cream-dark); border-radius: 18px; margin: 10px 0;
 }
 .steps li::before {
